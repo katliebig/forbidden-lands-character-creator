@@ -1,0 +1,21 @@
+<table>
+    <thead>
+        <tr>
+            <th colspan="2">Grundegenskaper {{maxAttributeSum - currentAttributeSum}}</th>
+        </tr>
+    </thead>
+    <tbody *ngIf="upbringing">
+        <tr *ngFor="let attribute of upbringing.attributes">
+            <td>{{attribute.name}}</td>
+            <td>
+                <button (click)="decreaseAttribute(attribute)">
+                    -
+                </button>
+                {{attribute.value}}
+                <button (click)="increaseAttribute(attribute)">
+                    +
+                </button>
+            </td>
+        </tr>
+    </tbody>
+</table>
