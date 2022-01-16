@@ -1,0 +1,29 @@
+<table>
+    <thead>
+        <tr>
+            <th colspan="2">Talanger</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngIf="character.kin.talent">
+            <td>{{character.kin.talent}}</td>
+            <td></td>
+        </tr>
+        <tr *ngIf="character.professionalTalent.name">
+            <td>{{character.professionalTalent.name}}</td>
+            <td>{{character.professionalTalent.value}}</td>
+        </tr>
+        <tr *ngFor="let talent of character.talents">
+            <td>{{talent.name}}</td>
+            <td>
+                <!-- <button (click)="decreaseTalent(talent)">
+                    -
+                </button> -->
+                {{talent.value}}
+                <!-- <button (click)="increaseTalent(talent)">
+                    +
+                </button> -->
+            </td>
+        </tr>
+    </tbody>
+</table>

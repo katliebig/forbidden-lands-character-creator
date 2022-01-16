@@ -1,1 +1,21 @@
-<p>skills works!</p>
+<table>
+    <thead>
+        <tr>
+            <th colspan="2">Färdigheter {{character.currentSkillSum}}/{{character.maxSkillSum}}</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let skill of character.skills">
+            <td>{{skill.name}}</td>
+            <td>
+                <button [disabled]="!character.upbringing.name ? 'disabled': null" (click)="decreaseSkill(skill)">
+                    -
+                </button>
+                {{skill.value}}
+                <button [disabled]="!character.upbringing.name ? 'disabled': null" (click)="increaseSkill(skill)">
+                    +
+                </button>
+            </td>
+        </tr>
+    </tbody>
+</table>

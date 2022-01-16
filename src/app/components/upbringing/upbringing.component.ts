@@ -1,6 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { DiceService } from 'src/app/services/dice.service';
 import Upbringing from '../classes/Upbringing';
+import Character from '../classes/Character';
+import Skill from '../classes/Skill';
 
 @Component({
   selector: 'app-upbringing',
@@ -8,29 +10,7 @@ import Upbringing from '../classes/Upbringing';
   styleUrls: ['./upbringing.component.scss']
 })
 export class UpbringingComponent implements OnInit {
-  upbringing: Upbringing = {
-    name: "",
-      description: "",
-      attributes: [
-        {
-          name: "Styrka",
-          value: 0,
-        },
-        {
-          name: "Smidighet",
-          value: 0,
-        },
-        {
-          name: "Intelligens",
-          value: 0,
-        },
-        {
-          name: "Karisma",
-          value: 0,
-        }
-      ], 
-      skills: []
-  }
+  @Input() character: Character = new Character
 
   constructor(private diceService: DiceService) { }
 
@@ -38,10 +18,33 @@ export class UpbringingComponent implements OnInit {
   }
 
   rollUpbringing(): void {
+    this.resetUpbringingSkills()
     let result = this.diceService.roll1D6() - 1
-    this.upbringing = this.upbringingAlderlänning[result]
+    this.character.upbringing = this.upbringingAlderlänning[result]
+    this.character.currentAttributeSum = 15
+    this.character.currentSkillSum = 6
+    this.updateSkills(this.character.upbringing.skills)
   }
 
+  resetUpbringingSkills() {
+    for (let characterSkill of this.character.skills) {
+      for (let upbringingSkill of this.character.upbringing.skills) {
+        if (characterSkill.name === upbringingSkill.name) {
+          characterSkill.value -= upbringingSkill.value
+        }
+      }
+    }
+  }
+
+  updateSkills(skills: Skill[]) {
+    for (let oldSkill of this.character.skills) {
+      for (let newSkill of skills) {
+        if (oldSkill.name === newSkill.name) {
+          oldSkill.value += newSkill.value
+        }
+      }
+    }
+  }
 
   upbringingAlderlänning: Upbringing[] = [
     {
@@ -64,7 +67,7 @@ export class UpbringingComponent implements OnInit {
           name: "Karisma",
           value: 4,
         }
-      ], 
+      ],
       skills: [
         {
           name: "Uthållighet",
@@ -112,7 +115,7 @@ export class UpbringingComponent implements OnInit {
           name: "Karisma",
           value: 4,
         }
-      ], 
+      ],
       skills: [
         {
           name: "Styrkeprov",
@@ -152,7 +155,7 @@ export class UpbringingComponent implements OnInit {
           name: "Karisma",
           value: 3,
         }
-      ], 
+      ],
       skills: [
         {
           name: "Uthållighet",
@@ -196,7 +199,7 @@ export class UpbringingComponent implements OnInit {
           name: "Karisma",
           value: 4,
         }
-      ], 
+      ],
       skills: [
         {
           name: "Uthållighet",
@@ -240,7 +243,7 @@ export class UpbringingComponent implements OnInit {
           name: "Karisma",
           value: 4,
         }
-      ], 
+      ],
       skills: [
         {
           name: "Styrkeprov",
@@ -284,7 +287,7 @@ export class UpbringingComponent implements OnInit {
           name: "Karisma",
           value: 4,
         }
-      ], 
+      ],
       skills: [
         {
           name: "Hantverk",

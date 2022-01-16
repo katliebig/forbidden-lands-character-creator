@@ -1,6 +1,6 @@
-<button (click)="rollUpbringing()">Klicka för att rulla uppväxt</button>
+<button (click)="rollUpbringing()">Slå uppväxt</button>
 <div>
-  <p>{{upbringing.name}}</p>
-  <p>{{upbringing.description}}</p>
+  <p>{{character.upbringing.name}}</p>
+  <p>{{character.upbringing.description}}</p>
 </div>
-<app-attributes [upbringing]="upbringing"></app-attributes>
+<app-attributes [character]="character"></app-attributes>

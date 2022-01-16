@@ -10,6 +10,8 @@ import { ProfessionComponent } from './components/profession/profession.componen
 import { UpbringingComponent } from './components/upbringing/upbringing.component';
 import { SkillsComponent } from './components/skills/skills.component';
 import { AttributesComponent } from './components/attributes/attributes.component';
+import { TalentsComponent } from './components/talents/talents.component';
+import { EventsComponent } from './components/events/events.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +22,9 @@ import { AttributesComponent } from './components/attributes/attributes.componen
     ProfessionComponent,
     UpbringingComponent,
     SkillsComponent,
-    AttributesComponent
+    AttributesComponent,
+    TalentsComponent,
+    EventsComponent
   ],
   imports: [
     BrowserModule,

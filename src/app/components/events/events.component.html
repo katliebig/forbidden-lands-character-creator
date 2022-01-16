@@ -1,0 +1,6 @@
+<p>You may roll {{character.eventCredits}} events. (Trade attributes for more events)</p>
+<button (click)="rollEvent()">Slå livshändelse</button>
+<div *ngFor="let event of character.events">
+  <p>{{event.name}} <button (click)="rerollEvent(event)">Slå om</button></p>
+  <p>{{event.description}}</p>
+</div>

@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import Attribute from '../classes/Attribute';
-import Upbringing from '../classes/Upbringing';
+import Character from '../classes/Character';
 
 @Component({
   selector: 'app-attributes',
@@ -8,33 +8,31 @@ import Upbringing from '../classes/Upbringing';
   styleUrls: ['./attributes.component.scss']
 })
 export class AttributesComponent implements OnInit {
-  @Input() upbringing: Upbringing | null = null
-  maxAttributeSum: number = 15
-  currentAttributeSum: number = 15
-  // TODO: update currentAttributeSum when rolling an upbringing
+  @Input() character: Character = new Character
 
-  constructor() {}
+  constructor() { }
 
   ngOnInit(): void {
+    console.log(this.character)
   }
 
   decreaseAttribute(attribute: Attribute) {
+    // this.currentAttributeSum = this.character.upbringing.attributes.map(attr => attr.value).reduce((a, b) => a + b)
+
     if (attribute.value > 0) {
       attribute.value -= 1
-      this.currentAttributeSum -= 1
+      this.character.currentAttributeSum -= 1
+      this.character.eventCredits += 1
     }
   }
 
   increaseAttribute(attribute: Attribute) {
-    if (this.upbringing) {
-      // let currentAttributeSum = this.upbringing.attributes.map(attr => attr.value).reduce((a, b) => a+b)
-
-      if (attribute.value < 5 && this.currentAttributeSum < this.maxAttributeSum) {
+    if (this.character.upbringing) {
+      if (attribute.value < 5 && this.character.currentAttributeSum < this.character.maxAttributeSum && this.character.eventCredits > 0) {
         attribute.value += 1
-        this.currentAttributeSum += 1
+        this.character.currentAttributeSum += 1
+        this.character.eventCredits -= 1
       }
     }
   }
-
-
 }

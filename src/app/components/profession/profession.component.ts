@@ -1,5 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { DiceService } from 'src/app/services/dice.service';
+import Character from '../classes/Character';
+import Talent from '../classes/Talent';
 
 @Component({
   selector: 'app-profession',
@@ -7,9 +9,8 @@ import { DiceService } from 'src/app/services/dice.service';
   styleUrls: ['./profession.component.scss']
 })
 export class ProfessionComponent implements OnInit {
-  profession: string = ""
-  professionalTalent: string = ""
-
+  @Input() character: Character = new Character
+  
   constructor(private diceService: DiceService) { }
 
   ngOnInit(): void {
@@ -18,96 +19,96 @@ export class ProfessionComponent implements OnInit {
   rollProfession(): void {
     let roll = this.diceService.roll2D6()
     if (roll < 15) {
-      this.profession = "Druid"
+      this.character.profession = "Druid"
     } else if (roll < 24) {
-      this.profession = "Jägare"
+      this.character.profession = "Jägare"
     } else if (roll < 34) {
-      this.profession = "Krigare"
+      this.character.profession = "Krigare"
     } else if (roll < 43) {
-      this.profession = "Magiker"
+      this.character.profession = "Magiker"
     } else if (roll < 51) {
-      this.profession = "Nasare"
+      this.character.profession = "Nasare"
     } else if (roll < 55) {
-      this.profession = "Ryttare"
+      this.character.profession = "Ryttare"
     } else if (roll < 63) {
-      this.profession = "Skald"
+      this.character.profession = "Skald"
     } else {
-      this.profession = "Tjuv"
+      this.character.profession = "Tjuv"
     }
-    this.professionalTalent = ""
+    this.character.professionalTalent = new Talent("")
   }
 
   rollProfessionalTalent(): void {
-    if (this.profession === "") {
+    if (this.character.profession === "") {
       alert("You need to roll a profession first.")
     }
     let roll = this.diceService.roll1D6()
-    if (this.profession === "Druid") {
+    if (this.character.profession === "Druid") {
       if (roll < 3) {
-        this.professionalTalent = "Helandets Väg"
+        this.character.professionalTalent = new Talent("Helandets Väg")
       } else if (roll < 5) {
-        this.professionalTalent = "Hamnskiftets Väg"
+        this.character.professionalTalent = new Talent("Hamnskiftets Väg")
       } else {
-        this.professionalTalent = "Synens Väg"
+        this.character.professionalTalent = new Talent("Synens Väg")
       }
-    } else if (this.profession === "Jägare") {
+    } else if (this.character.profession === "Jägare") {
       if (roll < 3) {
-        this.professionalTalent = "Djurets Väg"
+        this.character.professionalTalent = new Talent("Djurets Väg")
       } else if (roll < 5) {
-        this.professionalTalent = "Pilens Väg"
+        this.character.professionalTalent = new Talent("Pilens Väg")
       } else {
-        this.professionalTalent = "Skogens Väg"
+        this.character.professionalTalent = new Talent("Skogens Väg")
       }
-    } else if (this.profession === "Krigare") {
+    } else if (this.character.profession === "Krigare") {
       if (roll < 3) {
-        this.professionalTalent = "Svärdets Väg"
+        this.character.professionalTalent = new Talent("Svärdets Väg")
       } else if (roll < 5) {
-        this.professionalTalent = "Sköldens Väg"
+        this.character.professionalTalent = new Talent("Sköldens Väg")
       } else {
-        this.professionalTalent = "Fiendens Väg"
+        this.character.professionalTalent = new Talent("Fiendens Väg")
       }
-    } else if (this.profession === "Nasare") {
+    } else if (this.character.profession === "Nasare") {
       if (roll < 3) {
-        this.professionalTalent = "Guldets Väg"
+        this.character.professionalTalent = new Talent("Guldets Väg")
       } else if (roll < 5) {
-        this.professionalTalent = "Kappsäckens Väg"
+        this.character.professionalTalent = new Talent("Kappsäckens Väg")
       } else {
-        this.professionalTalent = "Lögnens Väg"
+        this.character.professionalTalent = new Talent("Lögnens Väg")
       }
-    } else if (this.profession === "Ryttare") {
+    } else if (this.character.profession === "Ryttare") {
       if (roll < 3) {
-        this.professionalTalent = "Följeslagarens Väg"
+        this.character.professionalTalent = new Talent("Följeslagarens Väg")
       } else if (roll < 5) {
-        this.professionalTalent = "Riddarens Väg"
+        this.character.professionalTalent = new Talent("Riddarens Väg")
       } else {
-        this.professionalTalent = "Viddernas Väg"
+        this.character.professionalTalent = new Talent("Viddernas Väg")
       }
-    } else if (this.profession === "Skald") {
+    } else if (this.character.profession === "Skald") {
       if (roll < 3) {
-        this.professionalTalent = "Stämmans Väg"
+        this.character.professionalTalent = new Talent("Stämmans Väg")
       } else if (roll < 5) {
-        this.professionalTalent = "Hymnens Väg"
+        this.character.professionalTalent = new Talent("Hymnens Väg")
       } else {
-        this.professionalTalent = "Stridsropets Väg"
+        this.character.professionalTalent = new Talent("Stridsropets Väg")
       }
-    } else if (this.profession === "Tjuv") {
+    } else if (this.character.profession === "Tjuv") {
       if (roll < 3) {
-        this.professionalTalent = "Ansiktets Väg"
+        this.character.professionalTalent = new Talent("Ansiktets Väg")
       } else if (roll < 5) {
-        this.professionalTalent = "Giftets Väg"
+        this.character.professionalTalent = new Talent("Giftets Väg")
       } else {
-        this.professionalTalent = "Mördarens Väg"
+        this.character.professionalTalent = new Talent("Mördarens Väg")
       }
-    } else if (this.profession === "Magiker") {
+    } else if (this.character.profession === "Magiker") {
       let d8 = this.diceService.roll1D8()
       if (d8 < 3) {
-        this.professionalTalent = "Tecknets Väg"
+        this.character.professionalTalent = new Talent("Tecknets Väg")
       } else if (d8 < 5) {
-        this.professionalTalent = "Stenens Väg"
+        this.character.professionalTalent = new Talent("Stenens Väg")
       } else if (d8 < 7) {
-        this.professionalTalent = "Blodets Väg"
+        this.character.professionalTalent = new Talent("Blodets Väg")
       } else {
-        this.professionalTalent = "Dödens Väg"
+        this.character.professionalTalent = new Talent("Dödens Väg")
       }
     }
   }

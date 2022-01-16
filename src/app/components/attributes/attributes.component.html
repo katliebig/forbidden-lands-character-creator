@@ -1,18 +1,21 @@
 <table>
     <thead>
         <tr>
-            <th colspan="2">Grundegenskaper {{maxAttributeSum - currentAttributeSum}}</th>
+            <th>Grundegenskaper</th>
+            <th>{{character.currentAttributeSum}}/{{character.maxAttributeSum}}</th>
         </tr>
     </thead>
-    <tbody *ngIf="upbringing">
-        <tr *ngFor="let attribute of upbringing.attributes">
-            <td>{{attribute.name}}</td>
-            <td>
-                <button (click)="decreaseAttribute(attribute)">
+    <tbody *ngIf="character.upbringing">
+        <tr *ngFor="let attribute of character.upbringing.attributes">
+            <td class="name">{{attribute.name}}<span></span></td>
+            <td class="value">
+                <button [disabled]="!character.upbringing.name ? 'disabled': null"
+                    (click)="decreaseAttribute(attribute)">
                     -
                 </button>
-                {{attribute.value}}
-                <button (click)="increaseAttribute(attribute)">
+                <span>{{attribute.value}}</span>
+                <button [disabled]="!character.upbringing.name ? 'disabled': null"
+                    (click)="increaseAttribute(attribute)">
                     +
                 </button>
             </td>

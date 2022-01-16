@@ -1,5 +1,6 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { DiceService } from 'src/app/services/dice.service';
+import Character from '../classes/Character';
 
 @Component({
   selector: 'app-kin',
@@ -7,7 +8,8 @@ import { DiceService } from 'src/app/services/dice.service';
   styleUrls: ['./kin.component.scss']
 })
 export class KinComponent implements OnInit {
-  kin: string = ""
+  @Input() character: Character = new Character
+  // @Output() characterChange()<Event> = new EventEmitter
   constructor(private diceService: DiceService) { }
 
   ngOnInit(): void {
@@ -16,25 +18,25 @@ export class KinComponent implements OnInit {
   rollKin(): void {
     let roll = this.diceService.roll2D6()
     if (roll < 23) {
-      this.kin = "Alderlänning"
+      this.character.kin = { name: "Alderlänning", talent: "Adaptiv" }
     } else if (roll < 32) {
-      this.kin = "Aslen"
+      this.character.kin = { name: "Aslen", talent: "Adaptiv" }
     } else if (roll < 35) {
-      this.kin = "Eländer"
+      this.character.kin = { name: "Eländer", talent: "Adaptiv" }
     } else if (roll < 42) {
-      this.kin = "Halvalv"
+      this.character.kin = { name: "Halvalv", talent: "Psykisk kraft" }
     } else if (roll < 45) {
-      this.kin = "Halvlängdsman"
+      this.character.kin = { name: "Halvlängdsman", talent: "Kvickfotad" }
     } else if (roll < 53) {
-      this.kin = "Svartalf"
+      this.character.kin = { name: "Svartalf", talent: "Lömsk" }
     } else if (roll < 61) {
-      this.kin = "Orch"
+      this.character.kin = { name: "Orch", talent: "Stryktålig" }
     } else if (roll < 63) {
-      this.kin = "Vargfolk"
+      this.character.kin = { name: "Vargfolk", talent: "Jaktsinne" }
     } else if (roll < 65) {
-      this.kin = "Dvärg"
+      this.character.kin = { name: "Dvärg", talent: "Bita ihop" }
     } else {
-      this.kin = "Alv"
+      this.character.kin = { name: "Alv", talent: "Inre frid" }
     }
   }
 }
